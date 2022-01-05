@@ -5,6 +5,7 @@
   "dependencies": {
     "@redwoodjs/api": "0.39.4",
     "@redwoodjs/api-server": "0.39.4",
-    "@redwoodjs/graphql-server": "0.39.4"
+    "@redwoodjs/graphql-server": "0.39.4",
+    "jsforce": "^1.11.0"
   }
 }
