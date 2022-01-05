@@ -1,5 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import CasesCell from 'src/components/CasesCell'
 
 const HomePage = () => {
   return (
@@ -10,6 +11,8 @@ const HomePage = () => {
       />
 
       <h1>Salesforce + Redwood = ❤️</h1>
+
+      <CasesCell />
     </>
   )
 }
