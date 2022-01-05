@@ -1,7 +1,12 @@
 import { Connection } from 'jsforce'
+import fetch from 'node-fetch'
 
-const ACCESS_TOKEN = `${process.env.SALESFORCE_ACCESS_TOKEN}`
-const INSTANCE_URL = `${process.env.SALESFORCE_INSTANCE_URL}`
+const SALESFORCE_INSTANCE_URL = `${process.env.SALESFORCE_INSTANCE_URL}`
+const SALESFORCE_CLIENT_ID = `${process.env.SALESFORCE_CLIENT_ID}`
+const SALESFORCE_CLIENT_SECRET = `${process.env.SALESFORCE_CLIENT_SECRET}`
+const SALESFORCE_USER_NAME = `${process.env.SALESFORCE_USER_NAME}`
+const SALESFORCE_USER_PASSWORD = `${process.env.SALESFORCE_USER_PASSWORD}`
+const SALESFORCE_USER_SECURITY_TOKEN = `${process.env.SALESFORCE_USER_SECURITY_TOKEN}`
 
 /**
  * Retrieve a valid access token from Salesforce.
@@ -13,13 +18,27 @@ const INSTANCE_URL = `${process.env.SALESFORCE_INSTANCE_URL}`
  * @see https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_username_password_flow.htm&type=5
  */
 async function getToken() {
-  // TODO: Actually used the client secrets, etc to get a fresh token
-  return ACCESS_TOKEN
+  const url = `${SALESFORCE_INSTANCE_URL}/services/oauth2/token`
+  // We need to concatenate the user password with their security token.
+  const password = `${SALESFORCE_USER_PASSWORD}${SALESFORCE_USER_SECURITY_TOKEN}`
+  const formBody = {
+    grant_type: 'password',
+    client_id: SALESFORCE_CLIENT_ID,
+    client_secret: SALESFORCE_CLIENT_SECRET,
+    username: SALESFORCE_USER_NAME,
+    password,
+  }
+
+  const response = await fetch(url)
+  const json = await response.json()
+  const accessToken = json.access_token
+
+  return accessToken
 }
 
 async function getConnection() {
   const conn = new Connection({
-    instanceUrl: INSTANCE_URL,
+    instanceUrl: SALESFORCE_INSTANCE_URL,
     accessToken: await getToken(),
   })
   return conn
