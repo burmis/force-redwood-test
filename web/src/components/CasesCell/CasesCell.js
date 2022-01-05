@@ -1,7 +1,10 @@
 export const QUERY = gql`
   query CasesQuery {
-    cases {
+    cases: sfCases {
       id
+      subject
+      description
+      status
     }
   }
 `
