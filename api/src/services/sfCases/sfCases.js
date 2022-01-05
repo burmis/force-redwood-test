@@ -45,11 +45,7 @@ async function getCases() {
     'SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Name, Contact.Email, Status, Description, Subject FROM Case'
   )
 
-  console.log('👀 query results = ', results)
-
   const cases = results.records.map(sfCaseToCase)
-
-  console.log('👀 query cases = ', cases)
 
   return cases
 }
