@@ -2,6 +2,11 @@ export const QUERY = gql`
   query CasesQuery {
     cases: sfCases {
       id
+      caseNumber
+      accountId
+      accountName
+      contactName
+      contactEmail
       subject
       description
       status

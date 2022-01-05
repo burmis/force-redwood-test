@@ -2,7 +2,10 @@ export const schema = gql`
   type sfCase {
     id: String!
     accountId: String
+    accountName: String
+    caseNumber: String
     contactId: String
+    contactName: String
     contactEmail: String
     subject: String
     description: String

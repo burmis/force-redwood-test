@@ -25,12 +25,32 @@ async function getConnection() {
   return conn
 }
 
+function sfCaseToCase(sfCase) {
+  return {
+    id: sfCase.Id,
+    accountId: sfCase.AccountId,
+    accountName: sfCase?.Account?.Name,
+    caseNumber: sfCase.CaseNumber,
+    contactName: sfCase?.Contact?.Name,
+    contactEmail: sfCase?.Contact?.Email,
+    status: sfCase.Status,
+    description: sfCase.Description,
+    subject: sfCase.Subject,
+  }
+}
+
 async function getCases() {
   const conn = await getConnection()
-  const result = await conn.query(
-    'SELECT Id, AccountId, Account.Name, CaseNumber, Status, Description, Subject FROM Case'
+  const results = await conn.query(
+    'SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Name, Contact.Email, Status, Description, Subject FROM Case'
   )
-  console.log('👀 query result = ', result)
+
+  console.log('👀 query results = ', results)
+
+  const cases = results.records.map(sfCaseToCase)
+
+  console.log('👀 query cases = ', cases)
+
   return cases
 }
 
