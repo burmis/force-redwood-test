@@ -20,11 +20,14 @@ const HomePage = () => {
       />
 
       <MainLayout>
-        <p>
+        <p className="mx-auto py-2">
           Filter the displayed cases by email. In production, this would be tied
           to a users email or other values set by the team.
         </p>
-        <Form onSubmit={onSubmit}>
+        <Form
+          className="border border-gray-200 rounded-lg px-2 py-2 my-2"
+          onSubmit={onSubmit}
+        >
           <Label
             name="contactEmail"
             className="label"

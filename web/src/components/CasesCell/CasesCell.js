@@ -25,9 +25,13 @@ export const Failure = ({ error }) => (
 
 export const Success = ({ cases }) => {
   return (
-    <ul>
+    <ul className="border border-gray-200 rounded-lg px-2 py-2 my-2">
       {cases.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
+        return (
+          <li className="" key={item.id}>
+            {JSON.stringify(item)}
+          </li>
+        )
       })}
     </ul>
   )
