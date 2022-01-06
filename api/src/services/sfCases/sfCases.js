@@ -77,25 +77,13 @@ async function getCases() {
   return cases
 }
 
-const cases = [
-  {
-    id: '1',
-    accountId: '1',
-    contactId: '1',
-    contactEmail: 'test@test.com',
-    subject: 'Test Case',
-    description: 'Testing out GraphQL',
-    status: 'New',
-  },
-]
-
 export const sfCases = () => {
   const conn = getConnection()
   return getCases(conn)
 }
 
 export const sfCase = ({ id }) => {
-  return cases.find((c) => c.id === id)
+  return getCases.find((c) => c.id === id)
 }
 
 export const createSfCase = ({ input }) => {
