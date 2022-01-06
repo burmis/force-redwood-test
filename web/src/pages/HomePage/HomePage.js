@@ -1,10 +1,14 @@
 import { Form, Label, Submit, TextField } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 import CasesCell from 'src/components/CasesCell'
+import { useState } from 'react'
 
 const HomePage = () => {
+  const [contactEmail, setContactEmail] = useState('')
+
   const onSubmit = (data) => {
     console.log(data)
+    setContactEmail(data.contactEmail)
   }
 
   return (
@@ -36,7 +40,7 @@ const HomePage = () => {
         />
         <Submit className="button">Filter</Submit>
       </Form>
-      <CasesCell contactEmail="sarah@test.com" />
+      <CasesCell contactEmail={contactEmail} />
     </>
   )
 }
