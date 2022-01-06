@@ -13,6 +13,7 @@ import UserExamplesLayout from 'src/layouts/UserExamplesLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/login" page={LoginPage} name="login" />
       <Route path="/" page={HomePage} name="home" />
       <Set wrap={UserExamplesLayout}>
         <Route path="/user-examples/new" page={UserExampleNewUserExamplePage} name="newUserExample" />
