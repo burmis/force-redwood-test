@@ -58,6 +58,7 @@ function sfCaseToCase(sfCase) {
     accountId: sfCase.AccountId,
     accountName: sfCase?.Account?.Name,
     caseNumber: sfCase.CaseNumber,
+    contactId: sfCase?.Contact?.Id,
     contactName: sfCase?.Contact?.Name,
     contactEmail: sfCase?.Contact?.Email,
     status: sfCase.Status,
@@ -66,20 +67,21 @@ function sfCaseToCase(sfCase) {
   }
 }
 
-async function getCases() {
+async function getCases(contactEmail) {
   const conn = await getConnection()
-  const results = await conn.query(
-    'SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Name, Contact.Email, Status, Description, Subject FROM Case'
-  )
+  const whereFragment = contactEmail
+    ? ` WHERE Contact.Email = '${contactEmail}'`
+    : ''
+  const query = `SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Id, Contact.Name, Contact.Email, Status, Description, Subject FROM Case${whereFragment}`
+  const results = await conn.query(query)
 
   const cases = results.records.map(sfCaseToCase)
 
   return cases
 }
 
-export const sfCases = () => {
-  const conn = getConnection()
-  return getCases(conn)
+export const sfCases = ({ contactEmail }) => {
+  return getCases(contactEmail)
 }
 
 export const sfCase = ({ id }) => {
