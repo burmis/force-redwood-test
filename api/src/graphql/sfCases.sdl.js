@@ -13,7 +13,7 @@ export const schema = gql`
   }
 
   type Query {
-    sfCases: [sfCase!]! @requireAuth
+    sfCases(contactEmail: String): [sfCase!]! @requireAuth
     sfCase(id: String!): sfCase @requireAuth
   }
 
