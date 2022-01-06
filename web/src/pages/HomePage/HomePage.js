@@ -20,8 +20,6 @@ const HomePage = () => {
       />
 
       <MainLayout>
-        <h1>Salesforce + Redwood = ❤️</h1>
-
         <p>
           Filter the displayed cases by email. In production, this would be tied
           to a users email or other values set by the team.
