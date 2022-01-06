@@ -1,10 +1,11 @@
 export const QUERY = gql`
-  query CasesQuery {
-    cases: sfCases {
+  query CasesQuery($contactEmail: String) {
+    cases: sfCases(contactEmail: $contactEmail) {
       id
       caseNumber
       accountId
       accountName
+      contactId
       contactName
       contactEmail
       subject
