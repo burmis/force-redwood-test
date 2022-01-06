@@ -12,7 +12,8 @@ const HomePage = () => {
 
       <h1>Salesforce + Redwood = ❤️</h1>
 
-      <CasesCell />
+      <p>Showing cases owned by &quot;sarah@test.com&quot;.</p>
+      <CasesCell contactEmail="sarah@test.com" />
     </>
   )
 }
