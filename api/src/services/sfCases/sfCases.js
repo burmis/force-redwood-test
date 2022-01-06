@@ -58,6 +58,7 @@ function sfCaseToCase(sfCase) {
     accountId: sfCase.AccountId,
     accountName: sfCase?.Account?.Name,
     caseNumber: sfCase.CaseNumber,
+    contactId: sfCase?.Contact?.Id,
     contactName: sfCase?.Contact?.Name,
     contactEmail: sfCase?.Contact?.Email,
     status: sfCase.Status,
@@ -71,7 +72,7 @@ async function getCases(contactEmail) {
   const whereFragment = contactEmail
     ? ` WHERE Contact.Email = '${contactEmail}'`
     : ''
-  const query = `SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Name, Contact.Email, Status, Description, Subject FROM Case${whereFragment}`
+  const query = `SELECT Id, AccountId, Account.Name, CaseNumber, Contact.Id, Contact.Name, Contact.Email, Status, Description, Subject FROM Case${whereFragment}`
   const results = await conn.query(query)
 
   const cases = results.records.map(sfCaseToCase)
