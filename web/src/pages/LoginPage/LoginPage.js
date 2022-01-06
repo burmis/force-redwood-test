@@ -1,19 +1,17 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import { useAuth } from '@redwoodjs/auth'
 
 const LoginPage = () => {
+  const { isAuthenticated, currentUser, logIn, logOut } = useAuth()
   return (
     <>
       <MetaTags title="Login" description="Login page" />
 
       <h1>LoginPage</h1>
-      <p>
-        Find me in <code>./web/src/pages/LoginPage/LoginPage.js</code>
-      </p>
-      <p>
-        My default route is named <code>login</code>, link to me with `
-        <Link to={routes.login()}>Login</Link>`
-      </p>
+      {isAuthenticated && <p>Logged in as {currentUser.email}</p>}
+      {!isAuthenticated && <p>Logged Out</p>}
+      <button onClick={logIn}>Log In</button>
+      <button onClick={logOut}>Log Out</button>
     </>
   )
 }
