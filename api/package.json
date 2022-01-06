@@ -7,6 +7,6 @@
     "@redwoodjs/api-server": "^0.41.0",
     "@redwoodjs/graphql-server": "^0.41.0",
     "jsforce": "^1.11.0",
-    "node-fetch": "^3.1.0"
+    "node-fetch": "2"
   }
 }

@@ -1,5 +1,5 @@
 import { Connection } from 'jsforce'
-import fetch from 'node-fetch'
+import fetch, { Request } from 'node-fetch'
 
 const SALESFORCE_INSTANCE_URL = `${process.env.SALESFORCE_INSTANCE_URL}`
 const SALESFORCE_CLIENT_ID = `${process.env.SALESFORCE_CLIENT_ID}`
@@ -21,15 +21,23 @@ async function getToken() {
   const url = `${SALESFORCE_INSTANCE_URL}/services/oauth2/token`
   // We need to concatenate the user password with their security token.
   const password = `${SALESFORCE_USER_PASSWORD}${SALESFORCE_USER_SECURITY_TOKEN}`
-  const formBody = {
+  const formParams = {
     grant_type: 'password',
     client_id: SALESFORCE_CLIENT_ID,
     client_secret: SALESFORCE_CLIENT_SECRET,
     username: SALESFORCE_USER_NAME,
     password,
   }
+  const params = new URLSearchParams(formParams)
 
-  const response = await fetch(url)
+  const request = new Request(url, {
+    method: 'POST',
+    body: params.toString(),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+  const response = await fetch(request)
   const json = await response.json()
   const accessToken = json.access_token
 
